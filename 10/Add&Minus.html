@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>10以内加减法</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）
+        function generateProblems() {
+            const problems = [];
+            const problemSet = new Set();
+
+            for (let i = 0; i < 100; i++) {
+                let newProblem;
+                do {
+                    const isAddition = Math.random() < 0.5;
+                    let num1, num2;
+
+                    if (isAddition) {
+                        num1 = Math.floor(Math.random() * 11);
+                        num2 = Math.floor(Math.random() * (11 - num1));
+                    } else {
+                        num1 = Math.floor(Math.random() * 10) + 1;
+                        num2 = Math.floor(Math.random() * num1);
+                    }
+
+                    newProblem = {
+                        num1,
+                        num2,
+                        operator: isAddition ? '+' : '-',
+                        answer: isAddition ? num1 + num2 : num1 - num2
+                    };
+                } while (problemSet.has(`${newProblem.num1}${newProblem.operator}${newProblem.num2}`));
+
+                problems.push(newProblem);
+                problemSet.add(`${newProblem.num1}${newProblem.operator}${newProblem.num2}`);
+            }
+            return problems;
+        }
+
+        // 初始化题目
+        function initProblems() {
+            app.problems.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+            generateProblems().forEach((problem, index) => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.num1} ${problem.operator} ${problem.num2} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>

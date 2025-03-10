@@ -1,0 +1,78 @@
+/* 通用样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 更童趣的字体 */
+}
+
+body {
+    background: #f7f9f0; /* 柔和的奶油黄背景 */
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fa5b5b; /* 珊瑚粉色标题 */
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(255,107,107,0.2);
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 12px rgba(255,107,107,0.15); /* 粉色系阴影 */
+    border: 2px solid #f5e7af; /* 阳光黄边框 */
+}
+
+.card h2 {
+    color: #686bf3; /* 薄荷绿标题 */
+    margin-bottom: 15px;
+    font-size: 22px;
+    padding-bottom: 8px;
+    border-bottom: 3px dotted #FF6B6B; /* 珊瑚粉虚线装饰 */
+}
+
+/* 优化按钮样式 */
+.btn {
+    background: linear-gradient(135deg, #edf5e0 0%, #e0f8e1 100%); /* 更明亮的渐变 */
+    color: #2d3436;
+    border: 2px solid #f5e7af;
+    padding: 12px 16px;
+    margin: 8px 4px;
+    flex: 1 1 140px;
+    font-size: 20px;
+    font-weight: 600; /* 文字加粗 */
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    border-radius: 20px; /* 增大圆角 */
+    box-shadow: 0 3px 6px rgba(255,175,175,0.2);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #cbf981 0%, #89f88d 100%);
+    box-shadow: 0 5px 12px rgba(255,175,175,0.2);
+}
+
+/* 响应式布局优化 */
+@media (max-width: 480px) {
+    .btn {
+        padding: 14px 10px;
+        font-size: 18px;
+        border-radius: 16px; /* 移动端圆角 */
+        margin: 6px;
+    }
+    .button-group {
+        gap: 8px;
+        justify-content: space-between; /* 平均分布 */
+        margin: 0 -6px; /* 抵消按钮外边距 */
+    }
+}

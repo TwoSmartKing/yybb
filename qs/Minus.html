@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>连减巧算</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）
+        function generateProblems() {
+            const problems = [];
+            const problemSet = new Set();
+            const tens = [10, 20, 30, 40, 50]; // 移除了100
+
+            // 生成100道题
+            while (problems.length < 100) {
+                // 生成被减数（最大为99）
+                const base = tens[Math.floor(Math.random() * tens.length)];
+                const minuend = base + (base === 90 ? 
+                    Math.floor(Math.random() * 10) % 1 :  // 当base=90时只加0-9的个位数，但实际base=90时base+0~9=90~99
+                    Math.floor(Math.random() * 10));
+                
+                // 生成符合要求的题目
+                const problem = generateSmartProblem(minuend);
+                if (!problem) continue;
+
+                // 创建唯一标识
+                const sortedSubtrahends = [...problem.subtrahends].sort((a, b) => a - b);
+                const problemKey = `${problem.minuend},${sortedSubtrahends.join(',')}`;
+
+                if (!problemSet.has(problemKey)) {
+                    problemSet.add(problemKey);
+                    problems.push(problem);
+                }
+            }
+            return problems;
+        }
+
+        // 智能生成题目（增加范围校验）
+        function generateSmartProblem(minuend) {
+            const strategy = Math.floor(Math.random() * 3);
+
+            try {
+                let subtrahend1, subtrahend2;
+                
+                // 策略1：两减数之和为整十数
+                if (strategy === 0) {
+                    const maxSum = Math.min(minuend, 90); // 最大和为90（保证足够空间）
+                    const sum = 10 * (1 + Math.floor(Math.random() * (maxSum/10 - 1)));
+                    subtrahend1 = Math.floor(Math.random() * sum);
+                    subtrahend2 = sum - subtrahend1;
+                }
+                // 策略2：第一个减数后得整十数
+                else if (strategy === 1) {
+                    const remainTen = 10 * (1 + Math.floor(Math.random() * (Math.floor(minuend/10) - 1)));
+                    subtrahend1 = minuend - remainTen;
+                    subtrahend2 = Math.floor(Math.random() * remainTen);
+                }
+                // 策略3：第二个减数后得整十数
+                else {
+                    const remainTen = 10 * (1 + Math.floor(Math.random() * (Math.floor(minuend/10) - 1)));
+                    subtrahend2 = minuend - remainTen;
+                    subtrahend1 = Math.floor(Math.random() * remainTen);
+                }
+
+                // 严格校验
+                if (
+                    subtrahend1 <= 0 || subtrahend2 <= 0 ||
+                    (minuend - subtrahend1 - subtrahend2) < 0
+                ) return null;
+
+                // 随机交换减数位置
+                return {
+                    minuend,
+                    subtrahends: Math.random() < 0.5 ? 
+                        [subtrahend1, subtrahend2] : 
+                        [subtrahend2, subtrahend1],
+                    answer: minuend - subtrahend1 - subtrahend2
+                };
+            } catch {
+                return null;
+            }
+        }
+
+        // 初始化题目（调整显示为减号）
+        function initProblems() {
+            app.problems.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+
+            generateProblems().forEach(problem => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.minuend} - ${problem.subtrahends[0]} - ${problem.subtrahends[1]} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>
+

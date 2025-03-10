@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>急急如律令</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）
+        function generateProblems() {
+            const problems = [];
+            const problemSet = new Set();
+
+            for (let i = 0; i < 100; i++) {
+                let newProblem;
+                do {
+                    // 生成三个随机数（1 - 50）
+                    const num1 = Math.floor(Math.random() * 50) + 1;
+                    const num2 = Math.floor(Math.random() * 50) + 1;
+                    const num3 = Math.floor(Math.random() * 50) + 1;
+
+                    // 随机运算符
+                    const operations = ['+', '-'];
+                    const op1 = operations[Math.floor(Math.random() * 2)];
+                    const op2 = operations[Math.floor(Math.random() * 2)];
+
+                    // 计算带符号数的值
+                    const a = num1;
+                    const b = op1 === '+' ? num2 : -num2;
+                    const c = op2 === '+' ? num3 : -num3;
+
+                    // 检查是否存在整十数组合（非零）
+                    const sumAB = a + b;
+                    const sumAC = a + c;
+                    const sumBC = b + c;
+                    const hasTens = [sumAB, sumAC, sumBC].some(
+                        sum => sum % 10 === 0 && sum !== 0
+                    );
+
+                    // 构造表达式和答案
+                    const expression = `${num1} ${op1} ${num2} ${op2} ${num3}`;
+                    let answer = eval(expression.replace(/ /g, '')); // 注意：实际生产环境应避免使用eval
+
+                    // 新增校验：结果不能为负数，单个数和结果最大不超过50
+                    const isValidNumbers = [num1, num2, num3, answer].every(num => num >= 0 && num <= 50);
+
+                    // 最终校验
+                    newProblem = {
+                        expression,
+                        answer,
+                        valid: hasTens && !isNaN(answer) && isValidNumbers
+                    };
+                } while (!newProblem.valid || problemSet.has(newProblem.expression));
+
+                problems.push(newProblem);
+                problemSet.add(newProblem.expression);
+            }
+            return problems;
+        }
+
+        // 初始化题目
+        function initProblems() {
+            app.problems.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+            generateProblems().forEach((problem, index) => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.expression} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>

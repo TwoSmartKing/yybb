@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>两位数加减法</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）
+        function generateProblems() {
+            const allPossible = [];
+            // 生成所有可能的两位数加减法题目，结果不超过 100
+            for (let num1 = 10; num1 <= 99; num1++) {
+                for (let num2 = 10; num2 <= 99; num2++) {
+                    // 加法情况
+                    const sum = num1 + num2;
+                    if (sum <= 100) {
+                        allPossible.push({
+                            num1,
+                            num2,
+                            operator: '+',
+                            answer: sum
+                        });
+                    }
+                    // 减法情况
+                    const difference = num1 - num2;
+                    if (difference >= 0) {
+                        allPossible.push({
+                            num1,
+                            num2,
+                            operator: '-',
+                            answer: difference
+                        });
+                    }
+                }
+            }
+
+            // 随机打乱顺序
+            for (let i = allPossible.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allPossible[i], allPossible[j]] = [allPossible[j], allPossible[i]];
+            }
+
+            return allPossible.slice(0, 100);
+        }
+
+        // 初始化题目
+        function initProblems() {
+            app.problems.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+            generateProblems().forEach((problem, index) => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.num1} ${problem.operator} ${problem.num2} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2到5表内除法</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）
+        function generateProblems() {
+            // 创建基础题目池
+            const base = [];
+            for (let divisor = 1; divisor <= 5; divisor++) {
+                for (let quotient = 1; quotient <= 5; quotient++) {
+                    base.push({
+                        num1: divisor * quotient, // 被除数
+                        num2: divisor,           // 除数
+                        operator: '÷',
+                        answer: quotient         // 商
+                    });
+                }
+            }
+
+            // 随机打乱顺序
+            for (let i = base.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [base[i], base[j]] = [base[j], base[i]];
+            }
+
+            // 生成目标题量
+            const result = [];
+            while (result.length < 100) {
+                result.push(...base);
+            }
+            return result.slice(0, 100);
+        }
+
+        // 初始化题目
+        function initProblems() {
+            app.problems.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+            generateProblems().forEach((problem, index) => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.num1} ${problem.operator} ${problem.num2} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>

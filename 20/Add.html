@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>20以内加法</title>
+    <link rel="stylesheet" href="../common.css"> 
+</head>
+
+<body>
+    <div id="header">
+        <div id="timer">剩余时间：60秒</div>
+        <div id="score">答对：0题</div>
+    </div>
+    <!-- 开始按钮 -->
+    <button id="start-button">计时开始</button>
+    <div id="problems-container">
+        <div id="problems"></div>
+    </div>
+    <!-- 自定义模态框 -->
+    <div id="result-modal">
+        <div id="result-modal-content">
+            <p id="result-text"></p>
+            <button id="restart-button">再来一次</button>
+        </div>
+    </div>
+
+    <script src="../common.js"></script>
+    <script>
+        // 生成题目（含去重逻辑）（结果范围10-20）
+        function generateProblems() {
+            const allPossible = [];
+            for (let num1 = 0; num1 <= 10; num1++) {
+                const minNum2 = Math.max(num1, 10 - num1);
+                const maxNum2 = 20 - num1;
+                for (let num2 = minNum2; num2 <= maxNum2; num2++) {
+                    allPossible.push({
+                        num1,
+                        num2,
+                        operator: '+',
+                        answer: num1 + num2
+                    });
+                }
+            }
+
+            // 随机打乱
+            for (let i = allPossible.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allPossible[i], allPossible[j]] = [allPossible[j], allPossible[i]];
+            }
+
+            return allPossible.slice(0, 100);
+        }
+
+        // 初始化题目
+        function initProblems() {
+            app.problems.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+            generateProblems().forEach((problem, index) => {
+                const div = document.createElement('div');
+                div.className = 'problem';
+                div.innerHTML = `
+                    <span>${problem.num1} ${problem.operator} ${problem.num2} =</span>
+                `;
+                div.appendChild(createInputElement(problem));
+                fragment.appendChild(div);
+            });
+            app.problems.appendChild(fragment);
+        }
+
+        // 初始化页面
+        function init() {
+            initProblems();
+            app.startButton.addEventListener('click', () => {
+                app.problemsContainer.style.display = 'block';
+                startTimer();
+                const firstInput = app.problems.querySelector('input');
+                if (firstInput) {
+                    firstInput.disabled = false; // 启用第一个输入框
+                    firstInput.focus();
+                    firstInput.select();
+                }
+                app.startButton.style.display = 'none';
+            });
+            app.restartButton.addEventListener('click', resetPage);
+        }
+    </script>
+</body>
+
+</html>
