@@ -29,6 +29,7 @@
     <script src="../common.js"></script>
     <script>
         // 生成题目（含去重逻辑）（结果范围10-20）
+        // 生成题目（含去重逻辑）（结果范围10-20）
         function generateProblems() {
             const allPossible = [];
             for (let num1 = 0; num1 <= 10; num1++) {
@@ -50,7 +51,12 @@
                 [allPossible[i], allPossible[j]] = [allPossible[j], allPossible[i]];
             }
 
-            return allPossible.slice(0, 100);
+            // 重复使用题目以确保有 100 道题目
+            const result = [];
+            while (result.length < 100) {
+                result.push(...allPossible);
+            }
+            return result.slice(0, 100);
         }
 
         // 初始化题目

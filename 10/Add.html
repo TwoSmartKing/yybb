@@ -49,8 +49,12 @@
                 [allProblems[i], allProblems[j]] = [allProblems[j], allProblems[i]];
             }
 
-            // 选取 100 道题目
-            return allProblems.slice(0, 100);
+            // 重复使用题目以确保有 100 道题目
+            const result = [];
+            while (result.length < 100) {
+                result.push(...allProblems);
+            }
+            return result.slice(0, 100);
         }
         
         // 初始化题目
