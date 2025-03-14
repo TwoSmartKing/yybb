@@ -87,7 +87,7 @@ function jumpToNext(currentInput) {
 function startTimer() {
     app.timerId = setInterval(() => {
         app.timeLeft--;
-        app.timerElement.textContent = `剩余时间：${app.timeLeft}秒`;
+        app.timerElement.textContent = `剩余：${app.timeLeft}秒`;
 
         if (app.timeLeft <= 0) {
             clearInterval(app.timerId);
@@ -116,7 +116,7 @@ function showResult() {
 function resetPage() {
     app.correctCount = 0;
     app.timeLeft = 60;
-    app.timerElement.textContent = `剩余时间：60秒`;
+    app.timerElement.textContent = `剩余：60秒`;
     app.scoreElement.textContent = `答对：0题`;
     clearInterval(app.timerId);
     app.problemsContainer.style.display = 'none';
