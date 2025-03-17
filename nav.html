@@ -1,0 +1,16 @@
+<!-- nav.html -->
+<div class="nav-container">
+    <a href="index.html" class="nav-item active">速算挑战</a>
+    <a href="formula-inference.html" class="nav-item">公式推理</a>
+    <a href="common-problems.html" class="nav-item">常见题型</a>
+</div>
+<script>
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function (event) {
+            if (this.href === window.location.href) {
+                event.preventDefault(); // 阻止默认的跳转行为
+            }
+        });
+    });
+</script>

@@ -15,6 +15,25 @@ const app = {
     startButton: document.getElementById('start-button')
 };
 
+// 加载导航栏
+function loadNavbar() {
+    // 获取当前页面的路径
+        fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            const navPlaceholder = document.getElementById('nav-placeholder');
+            navPlaceholder.innerHTML = data;
+
+            const currentPage = window.location.pathname.split('/').pop();
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                if (item.getAttribute('href') === currentPage) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
 // 创建输入框
 function createInputElement(problem) {
     const input = document.createElement('input');
@@ -36,7 +55,7 @@ function createInputElement(problem) {
                 // 若有不一致，清空输入框
                 setTimeout(() => {
                     e.target.value = '';
-                }, 200); // 延迟200毫秒，让用户能看到输入的字符
+                }, 500); // 延迟500毫秒，让用户能看到输入的字符
                 return;
             }
         }
@@ -85,6 +104,11 @@ function jumpToNext(currentInput) {
 
 // 倒计时
 function startTimer() {
+    // 统计题目数量
+    // const problemCount = app.problems.children.length;
+    // 提示题目数量
+    // alert(`本次共生成了 ${problemCount} 道题目，计时开始！`);
+
     app.timerId = setInterval(() => {
         app.timeLeft--;
         app.timerElement.textContent = `剩余：${app.timeLeft}秒`;
@@ -96,7 +120,6 @@ function startTimer() {
         }
     }, 1000);
 }
-
 function showResult() {
     let message;
     if (app.correctCount < 10) {
@@ -127,5 +150,9 @@ function resetPage() {
 
 // 确保 DOM 加载完成后再执行脚本
 document.addEventListener('DOMContentLoaded', () => {
-    init();
+    loadNavbar(); // 加载导航栏
+    // 检查 init 是否存在
+    if (typeof init === 'function') {
+        init(); // 调用 init 函数
+    }
 });
