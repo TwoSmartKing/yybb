@@ -3,68 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数学能力训练-速算挑战</title>
-    <!-- 引入外部 CSS 文件 -->
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>理科学习训练</title>
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
-    <div id="nav-placeholder"></div>
-
-    <div class="container">
-              
-        <!-- 10以内 -->
-        <div class="card">
-            <h2>🎯 10以内</h2>
-            <a href="10/Add.html"><button class="btn">➕ 加法飞船</button></a> 
-            <a href="10/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
-            <a href="10/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+    <!-- 一级导航 -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <ul class="nav-items">
+                <li class="nav-item active" data-target="quick-calc">速算挑战</li>
+                <li class="nav-item" data-target="formula">公式推理</li>
+                <li class="nav-item" data-target="common">常见题型</li>
+                <!----> 
+                <li class="nav-item" data-target="topic-mastery">专题突破</li>
+                <li class="nav-item" data-target="past-papers-bank">真题库</li>  
+                <li class="nav-item" data-target="error-notebook">错题本</li>
+                   
+            </ul>
         </div>
 
-        <!-- 20以内 -->
-        <div class="card">
-            <h2>🚀 20以内</h2>
-            <a href="20/Add.html"><button class="btn">➕ 加法飞船</button></a>
-            <a href="20/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
-            <a href="20/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+        <!-- 二级导航 -->
+        <div class="sub-nav" id="formula-sub">
+            <ul class="sub-items">
+                <li class="sub-item active" data-subtarget="primary-math">小学数学</li>
+                <li class="sub-item" data-subtarget="junior-math">初中数学</li>
+                <!--
+                <li class="sub-item" data-subtarget="high-math">高中数学</li>
+                <li class="sub-item" data-subtarget="junior-physics">初中物理</li>
+                <li class="sub-item" data-subtarget="high-physics">高中物理</li> 
+                -->               
+            </ul>
         </div>
 
-        <!-- 两位数 -->
-        <div class="card">
-            <h2>💫 两位数</h2>
-            <a href="two/Add.html"><button class="btn">➕ 加法飞船</button></a>
-            <a href="two/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
-            <a href="two/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+        <div class="sub-nav" id="common-sub">
+            <ul class="sub-items">
+                <li class="sub-item active" data-subtarget="grade1">一年级</li>
+                <li class="sub-item" data-subtarget="grade2">二年级</li>
+                <li class="sub-item" data-subtarget="grade3">三年级</li>
+                <!---->
+                <li class="sub-item" data-subtarget="grade4">四年级</li>
+                <li class="sub-item" data-subtarget="grade5">五年级</li>
+                <li class="sub-item" data-subtarget="grade6">六年级</li>
+                <li class="sub-item" data-subtarget="grade7">初一</li>
+                <li class="sub-item" data-subtarget="grade8">初二</li>
+                <li class="sub-item" data-subtarget="grade9">初三</li> 
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 内容区域 -->
+    <div class="content-section">
+        <div class="content-pane active" id="quick-calc">
+            <div class="container">
+                <!-- 10以内 -->
+                <div class="card">
+                    <h2>🎯 10以内</h2>
+                    <a href="10/Add.html"><button class="btn">➕ 加法飞船</button></a> 
+                    <a href="10/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
+                    <a href="10/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+                </div>
+
+                <!-- 20以内 -->
+                <div class="card">
+                    <h2>🚀 20以内</h2>
+                    <a href="20/Add.html"><button class="btn">➕ 加法飞船</button></a>
+                    <a href="20/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
+                    <a href="20/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+                </div>
+
+                <!-- 两位数 -->
+                <div class="card">
+                    <h2>💫 两位数</h2>
+                    <a href="two/Add.html"><button class="btn">➕ 加法飞船</button></a>
+                    <a href="two/Minus.html"><button class="btn">➖ 减法滑梯</button></a>
+                    <a href="two/Add&Minus.html"><button class="btn">🧮 加减算盘</button></a>
+                </div>
+
+                <!-- 巧算 -->
+                <div class="card">
+                    <h2>✨ 巧算屋</h2>
+                    <a href="qs/Add.html"><button class="btn">➕ 连加魔法</button></a>
+                    <a href="qs/Minus.html"><button class="btn">➖ 连减咒语</button></a>
+                    <a href="qs/Add&Minus.html"><button class="btn">🪄 急急如律令</button></a>
+                </div>
+
+                <!-- 表内乘除法 -->
+                <div class="card">
+                    <h2>🪐 小九九</h2>
+                    <a href="99/5Cheng.html"><button class="btn">❌ 初级魔法</button></a>
+                    <a href="99/5Chu.html"><button class="btn">➗ 初级咒语</button></a>
+                    <a href="99/9Cheng.html"><button class="btn">❌ 中级魔法</button></a>
+                    <a href="99/9Chu.html"><button class="btn">➗ 中级咒语</button></a>
+                    <a href="99/99Table.html"><button class="btn">🧙 大魔法师</button></a>
+                </div>        
+
+                <!-- 广告 -->
+                <div class="card">
+                    <h2>🌈 关注我</h2>
+                    <a href="https://v.douyin.com/i5WRVKpU/">
+                        <button class="btn">🎵 抖音</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 其他页签内容 -->
+        <div class="content-pane" id="formula">
+            <div class="container">
+                <div id="primary-math" class="sub-content active">
+                    <div class="card">
+                        <h2>📚 小学数学</h2>
+                        <button class="btn">小学数学</button>
+                    </div>
+                </div>
+                <div id="junior-math" class="sub-content">
+                    <div class="card">
+                        <h2>📚 初中数学</h2>
+                        <p>
+                            建设中
+                        </p>
+                    </div>
+                </div>
+                <!--
+                <div id="high-math" class="sub-content">
+                    <div class="card">
+                        <h2>📚 高中数学</h2>
+                        <button class="btn">高中数学</button>
+                    </div>
+                </div>
+                <div id="junior-physics" class="sub-content">
+                    <div class="card">
+                        <h2>📚 初中物理</h2>
+                        <button class="btn">初中物理</button>
+                    </div>
+                </div>
+                <div id="high-physics" class="sub-content">
+                    <div class="card">
+                        <h2>📚 高中物理</h2>
+                        <button class="btn">高中物理</button>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+        
+        <div class="content-pane" id="common">
+            <div class="container">
+                <div id="grade1" class="sub-content active">
+                    <!-- 一年级内容 -->
+                    <div class="card">
+                        <h2>📚 一年级数学</h2>
+                        <button class="btn">一年级数学</button>
+                    </div>
+                </div>
+                
+                <div id="grade2" class="sub-content">
+                    <div class="card">
+                        <h2>📚 二年级数学</h2>
+                        <button class="btn">二年级数学</button>
+                    </div>
+                </div>                
+                <div id="grade3" class="sub-content">
+                    <div class="card">
+                        <h2>📚 三年级数学</h2>
+                        <button class="btn">三年级数学</button>
+                    </div>
+                </div>                
+                <div id="grade4" class="sub-content">
+                    <div class="card">
+                        <h2>📚 四年级数学</h2>
+                        <button class="btn">四年级数学</button>
+                    </div>
+                </div>                
+                <div id="grade5" class="sub-content">
+                    <div class="card">
+                        <h2>📚 五年级数学</h2>
+                        <button class="btn">五年级数学</button>
+                    </div>
+                </div>                
+                <div id="grade6" class="sub-content">
+                    <div class="card">
+                        <h2>📚 六年级数学</h2>
+                        <button class="btn">六年级数学</button>
+                    </div>
+                </div>
+                <div id="grade7" class="sub-content">
+                    <div class="card">
+                        <h2>📚 初一数学</h2>
+                        <button class="btn">初一数学</button>
+                    </div>
+                </div>
+                <div id="grade8" class="sub-content">
+                    <div class="card">
+                        <h2>📚 初二数学</h2>
+                        <button class="btn">初二数学</button>
+                    </div>
+                </div>
+                <div id="grade9" class="sub-content">
+                    <div class="card">
+                        <h2>📚 初三数学</h2>
+                        <button class="btn">初三数学</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- 巧算 -->
-        <div class="card">
-            <h2>✨ 巧算屋</h2>
-            <a href="qs/Add.html"><button class="btn">➕ 连加魔法</button></a>
-            <a href="qs/Minus.html"><button class="btn">➖ 连减咒语</button></a>
-            <a href="qs/Add&Minus.html"><button class="btn">🪄 急急如律令</button></a>
+        <div class="content-pane" id="topic-mastery">
+            <div class="container">
+                <div class="card">
+                    <h2>📚 专题突破</h2>
+                    <button class="btn">专题突破</button>
+                </div>   
+            </div>
         </div>
 
-        <!-- 表内乘除法 -->
-        <div class="card">
-            <h2>🪐 小九九</h2>
-            <a href="99/5Cheng.html"><button class="btn">❌ 初级魔法</button></a>
-            <a href="99/5Chu.html"><button class="btn">➗ 初级咒语</button></a>
-            <a href="99/9Cheng.html"><button class="btn">❌ 中级魔法</button></a>
-            <a href="99/9Chu.html"><button class="btn">➗ 中级咒语</button></a>
-            <a href="99/99Table.html"><button class="btn">🧙 大魔法师</button></a>
-        </div>        
-
-        <!-- 广告 -->
-        <div class="card">
-            <h2>🌈 关注我</h2>
-            <a href="https://v.douyin.com/i5WRVKpU/ 09/18 i@C.hB Ok:/"><button class="btn">🎵 抖音 </button></a>
-            <!-- 
-            <a href="https://v.kuaishou.com/qKN2Aq"><button class="btn">🎥 快手 </button></a>
-            <a href="http://xhslink.com/a/3aQxzNC3JYa7"><button class="btn">📕 小红书 </button></a>
-            -->
+        <div class="content-pane" id="error-notebook">
+            <div class="container">
+                <div class="card">
+                    <h2>📚 错题本</h2>
+                    <button class="btn">错题本</button>
+                </div>   
+            </div>
         </div>
+
+        <div class="content-pane" id="past-papers-bank">
+            <div class="container">
+                <div class="card">
+                    <h2>📚 真题库</h2>
+                    <button class="btn">真题库</button>
+                </div>   
+            </div>
+        </div>
+
     </div>
-    <script src="common.js"></script>
+
+    <script>
+        // 一级导航切换
+        const navItems = document.querySelectorAll('.nav-item');
+        const subNavs = document.querySelectorAll('.sub-nav');
+        const contentPanes = document.querySelectorAll('.content-pane');
+
+        // 一级导航切换时调用调整函数
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // 移除所有激活状态
+                navItems.forEach(nav => nav.classList.remove('active'));
+                contentPanes.forEach(pane => pane.classList.remove('active'));
+                subNavs.forEach(sub => sub.classList.remove('active'));
+
+                // 激活当前项
+                item.classList.add('active');
+                const targetPane = document.getElementById(item.dataset.target);
+                targetPane.classList.add('active');
+
+                const mainNav = document.querySelector('.main-nav');
+                if (mainNav) {
+                    // 处理关联的二级导航
+                    const relatedSubNav = document.querySelector(`#${item.dataset.target}-sub`);
+                    if (relatedSubNav) {
+                        relatedSubNav.classList.add('active');
+                        mainNav.classList.add('active');
+                        
+                        // 激活默认子项
+                        const defaultSubItem = relatedSubNav.querySelector('.sub-item.active');
+                        if (defaultSubItem) {
+                            const targetSubContent = targetPane.querySelector(`#${defaultSubItem.dataset.subtarget}`);
+                            targetPane.querySelectorAll('.sub-content').forEach(el => el.classList.remove('active'));
+                            targetSubContent.classList.add('active');
+                        }
+                    } else {
+                        mainNav.classList.remove('active');
+                    }
+                }
+            });
+        });
+    
+        // 二级导航切换
+        document.querySelectorAll('.sub-nav').forEach(subNav => {
+            subNav.addEventListener('click', function(e) {
+                const target = e.target.closest('.sub-item');
+                if (!target) return;
+
+                // 更新当前二级导航状态
+                this.querySelectorAll('.sub-item').forEach(el => el.classList.remove('active'));
+                target.classList.add('active');
+
+                // 获取关联的内容容器
+                const contentPane = document.getElementById(this.parentElement.querySelector('.nav-item.active').dataset.target);
+                
+                // 显示对应内容
+                contentPane.querySelectorAll('.sub-content').forEach(el => {
+                    el.classList.remove('active');
+                    if (el.id === target.dataset.subtarget) el.classList.add('active');
+                });
+            });
+        });
+        
+        // 显示内容函数
+        function showContent(targetId) {
+            console.log('显示内容:', targetId);
+            contentPanes.forEach(pane => {
+                if (pane.id === targetId) {
+                    pane.classList.add('active');
+                } else {
+                    pane.classList.remove('active');
+                }
+            });
+        }
+
+        // 自动隐藏/显示滚动箭头
+        function updateScrollArrows() {
+            const containers = document.querySelectorAll('.nav-items, .sub-items');
+            containers.forEach(container => {
+                const arrowLeft = container.parentNode.querySelector('.scroll-arrow.left');
+                const arrowRight = container.parentNode.querySelector('.scroll-arrow.right');
+                
+                if(container.scrollLeft > 10) {
+                    arrowLeft.style.display = 'flex';
+                } else {
+                    arrowLeft.style.display = 'none';
+                }
+                
+                if(container.scrollWidth > container.clientWidth + container.scrollLeft) {
+                    arrowRight.style.display = 'flex';
+                } else {
+                    arrowRight.style.display = 'none';
+                }
+            });
+        }
+
+        // 初始化滚动箭头
+        document.querySelectorAll('.nav-container, .sub-nav').forEach(container => {
+            const arrowLeft = document.createElement('div');
+            arrowLeft.className = 'scroll-arrow left';
+            arrowLeft.innerHTML = '‹';
+            arrowLeft.onclick = () => {
+                container.querySelector('.nav-items, .sub-items').scrollBy({
+                    left: -200,
+                    behavior: 'smooth'
+                });
+            };
+
+            const arrowRight = document.createElement('div');
+            arrowRight.className = 'scroll-arrow right';
+            arrowRight.innerHTML = '›';
+            arrowRight.onclick = () => {
+                container.querySelector('.nav-items, .sub-items').scrollBy({
+                    left: 200,
+                    behavior: 'smooth'
+                });
+            };
+
+            container.appendChild(arrowLeft);
+            container.appendChild(arrowRight);
+        });
+
+        // 监听滚动事件
+        document.querySelectorAll('.nav-items, .sub-items').forEach(container => {
+            container.addEventListener('scroll', updateScrollArrows);
+        });
+
+        // 初始化
+        updateScrollArrows();
+        window.addEventListener('resize', updateScrollArrows);
+    </script>
 </body>
 </html>

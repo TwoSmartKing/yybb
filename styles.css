@@ -3,25 +3,178 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* 更童趣的字体 */
 }
 
-body {
-    background: #f7f9f0; /* 柔和的奶油黄背景 */
-    padding: 20px;
+/* 一级导航 */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    z-index: 100; /* 一级导航层叠顺序 */
 }
 
+.nav-container {    
+    height: 48px;         /* 调整导航栏高度 */
+    display: flex;
+    align-items: center; /* 垂直居中导航项 */
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.nav-items {
+    display: flex;
+    list-style: none;
+    padding: 0 10px;
+    height: 100%; /* 继承容器高度 */
+    align-items: center; /* 垂直居中 */
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+}
+
+.nav-items::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.nav-item {
+    /* 一级页签样式 */
+    flex: 0 0 auto;
+    padding: 14px 12px;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-item.active {
+    color: #f22;
+    font-weight: 600;
+}
+
+.nav-item.active::after {
+    display: none !important;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 2px;
+    background: #f22;
+}
+
+/* 二级导航 */
+.sub-nav {
+    display: none;
+    background: white;
+    padding: 3px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: relative; /* 确保二级导航有定位属性 */
+    z-index: 99; /* 二级导航层叠顺序低于一级导航 */
+}
+
+.sub-nav.active {
+    display: flex;
+}
+
+.sub-items {
+    display: flex;
+    list-style: none;
+    padding: 0 15px;
+    white-space: nowrap;
+}
+
+.sub-item {
+    /* 二级页签样式 */
+    flex: 0 0 auto;
+    margin: 0 12px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #666;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    /* 添加最大宽度限制 */
+    max-width: calc(100% - 24px); /* 这里假设一级页签有 12px 的左右内边距，根据实际情况调整 */
+}
+
+.sub-item.active {
+    color: #f22;
+    background: rgba(255,85,51,0.1);
+}
+
+:root {
+    --main-nav-height: 20px; /* 新增主导航高度变量 */
+}
+
+/* 调整内容区域间距 */
+.content-section {
+    margin-top: var(--main-nav-height); 
+    padding: 0 20px;
+    transition: margin-top 0.3s ease;
+    position: relative; /* 确保内容区域有定位属性 */
+    z-index: 1; /* 内容区域层叠顺序最低 */
+}
+
+/* 隐藏内容区块边框 */
+.content-pane {
+    border: none !important; /* 强制移除边框 */
+    box-shadow: none !important; /* 移除可能存在的阴影 */
+    padding: 20px 0;         /* 调整内边距 */
+    display: none; /* 默认隐藏 */
+}
+
+.content-pane.active {
+    display: block;
+}
+
+/* 当有二级导航栏时，增加顶部间距 */
+.main-nav.active + .content-section {
+    margin-top: calc(17px + var(--main-nav-height));
+}
+
+/* 滚动箭头 */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.scroll-arrow.left {
+    left: 0;
+}
+
+.scroll-arrow.right {
+    right: 0;
+}
+
+/* 在原有样式基础上添加以下新样式 */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    flex-wrap: nowrap;      /* 禁止换行 */
+    overflow-y: auto;       /* 允许垂直滚动 */
+    gap: 20px;             /* 元素间距 */
+    padding: 20px 0;        /* 纵向内边距 */
+    max-width: 800px;       /* 最大宽度限制 */
+    margin: 0 auto;         /* 水平居中 */
+    scroll-behavior: smooth;/* 平滑滚动 */
 }
-
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #fa5b5b; /* 珊瑚粉色标题 */
-    font-size: 28px;
-    text-shadow: 2px 2px 4px rgba(255,107,107,0.2);
+    
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card {
@@ -39,6 +192,7 @@ body {
     font-size: 22px;
     padding-bottom: 8px;
     border-bottom: 3px dotted #FF6B6B; /* 珊瑚粉虚线装饰 */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 更童趣的字体 */
 }
 
 /* 优化按钮样式 */
@@ -55,6 +209,7 @@ body {
     transition: all 0.2s ease;
     border-radius: 20px; /* 增大圆角 */
     box-shadow: 0 3px 6px rgba(255,175,175,0.2);
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 更童趣的字体 */
 }
 
 .btn:hover {
@@ -62,8 +217,19 @@ body {
     box-shadow: 0 5px 12px rgba(255,175,175,0.2);
 }
 
-/* 响应式布局优化 */
-@media (max-width: 480px) {
+.sub-content {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.sub-content.active {
+    display: block;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    
     .btn {
         padding: 14px 10px;
         font-size: 18px;
@@ -74,5 +240,39 @@ body {
         gap: 8px;
         justify-content: space-between; /* 平均分布 */
         margin: 0 -6px; /* 抵消按钮外边距 */
+    }
+
+    /* 手机端导航容器 */
+    .nav-container {
+        height: 45px; /* 增大高度便于触摸操作 */
+    }
+
+    /* 一级导航项适配 */
+    .nav-item {
+        flex: 1 0 auto; /* 允许伸缩但保持内容宽度 */
+        min-width: max-content; /* 最小宽度适应内容 */
+        padding: 12px 10px; /* 调整内边距 */
+        white-space: nowrap; /* 禁止文字换行 */
+        display: flex;
+        align-items: center; /* 垂直居中 */
+        justify-content: center; /* 水平居中 */
+    }
+
+    /* 二级导航项样式调整 */
+    .sub-item {
+        margin: 0 8px; /* 缩小间距 */
+        padding: 6px 10px; 
+        font-size: 13px;
+    }
+
+    /* 隐藏滚动箭头 */
+    .scroll-arrow {
+        display: none !important;
+    }
+
+    /* 防止文字缩放 */
+    .nav-item {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
 }
