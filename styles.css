@@ -78,8 +78,18 @@
     z-index: 99; /* 二级导航层叠顺序低于一级导航 */
 }
 
+/* 非激活状态的二级导航 */
+.sub-nav:not(.active) {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* 激活状态的二级导航 */
 .sub-nav.active {
     display: flex;
+    opacity: 1;
+    height: auto;
 }
 
 .sub-items {
@@ -113,7 +123,7 @@
 }
 
 :root {
-    --main-nav-height: 30px; /* 新增主导航高度变量 */
+    --main-nav-height: 58px; /* 新增主导航高度变量 */
 }
 
 /* 调整内容区域间距 */
@@ -130,16 +140,31 @@
     border: none !important; /* 强制移除边框 */
     box-shadow: none !important; /* 移除可能存在的阴影 */
     padding: 0px 0;         /* 调整内边距 */
-    display: none; /* 默认隐藏 */
+    display: none; /* 默认隐藏 */    
+    position: relative; /* 确保有定位属性 */
+    width: 100%; /* 确保宽度为100% */
+    justify-content: center; /* 新增 */
 }
 
 .content-pane.active {
     display: block;
 }
 
-/* 当有二级导航栏时，增加顶部间距 */
-.main-nav.active + .content-section {
-    margin-top: calc(10px + var(--main-nav-height));
+.scroll-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;          /* 新增 */
+    justify-content: center; /* 新增 */
+}
+
+/* 自定义滚动条 */
+.scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
 }
 
 /* 滚动箭头 */
@@ -172,10 +197,12 @@
     flex-wrap: nowrap;      /* 禁止换行 */
     overflow-y: auto;       /* 允许垂直滚动 */
     gap: 20px;             /* 元素间距 */
-    padding: 20px 0;        /* 纵向内边距 */
+    padding: 0px 0;        /* 纵向内边距 */
     max-width: 1200px;       /* 最大宽度限制 */
+    width: 100%;                
     margin: 0 auto;         /* 水平居中 */
     scroll-behavior: smooth;/* 平滑滚动 */
+    box-sizing: border-box;
 }
 
 .card {
@@ -311,7 +338,6 @@
     display: block;
 }
 
-
 /* 移动端适配 */
 @media (max-width: 768px) {
     .btn {
@@ -444,7 +470,7 @@
 
 /* 手风琴样式 */
 .accordion-item {  
-    margin-top: 0px !important;  
+    margin-top: 5px !important;  
     border-radius: 12px;
     overflow: hidden;
     border: 2px solid #ffdada; /* 统一边框颜色 */
