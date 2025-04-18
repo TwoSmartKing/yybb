@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>理科学习训练</title>
+    <title>杨杨爸爸理科学习训练</title>
     <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="katex/katex.min.css">
 </head>
 <body>
     <!-- 一级导航 -->
@@ -12,13 +13,13 @@
         <div class="nav-container">
             <ul class="nav-items">
                 <li class="nav-item active" data-target="quick-calc">速算挑战</li>
-                <li class="nav-item" data-target="formula">公式推理</li>
+                <li class="nav-item" data-target="formula">公式推导</li>
                 <li class="nav-item" data-target="common">常见题型</li>
-                <!----> 
+                <!--
                 <li class="nav-item" data-target="topic-mastery">专题突破</li>
                 <li class="nav-item" data-target="past-papers-bank">真题库</li>  
                 <li class="nav-item" data-target="error-notebook">错题本</li>
-                   
+                -->   
             </ul>
         </div>
 
@@ -27,7 +28,7 @@
             <ul class="sub-items">
                 <li class="sub-item active" data-subtarget="primary-math">小学数学</li>
                 <li class="sub-item" data-subtarget="junior-math">初中数学</li>
-                <!--
+                <!--                
                 <li class="sub-item" data-subtarget="high-math">高中数学</li>
                 <li class="sub-item" data-subtarget="junior-physics">初中物理</li>
                 <li class="sub-item" data-subtarget="high-physics">高中物理</li> 
@@ -39,15 +40,15 @@
             <ul class="sub-items">
                 <li class="sub-item active" data-subtarget="grade1">一年级</li>
                 <li class="sub-item" data-subtarget="grade2">二年级</li>
+                <!--
                 <li class="sub-item" data-subtarget="grade3">三年级</li>
-                <!---->
                 <li class="sub-item" data-subtarget="grade4">四年级</li>
                 <li class="sub-item" data-subtarget="grade5">五年级</li>
                 <li class="sub-item" data-subtarget="grade6">六年级</li>
                 <li class="sub-item" data-subtarget="grade7">初一</li>
                 <li class="sub-item" data-subtarget="grade8">初二</li>
                 <li class="sub-item" data-subtarget="grade9">初三</li> 
-                
+                -->
             </ul>
         </div>
     </nav>
@@ -108,21 +109,484 @@
             </div>
         </div>
         
-        <!-- 其他页签内容 -->
+        <!-- 公式推导 -->
         <div class="content-pane" id="formula">
             <div class="container">
                 <div id="primary-math" class="sub-content active">
-                    <div class="card">
-                        <h2>📚 小学数学</h2>
-                        <button class="btn">小学数学</button>
+                    <!-- 手风琴导航结构 -->
+                    <div class="accordion">
+                        <!-- 四则运算 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">四则运算 <span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+
+                                <div class="card">
+                                    <h2>基础</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">加法交换律：</div>
+                                                <div class="math-formula">a+b=b+a</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">加法结合律：</div>
+                                                <div class="math-formula">(a+b)+c=a+(b+c)</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">乘法交换律：</div>
+                                                <div class="math-formula">a×b=b×a</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">乘法结合律：</div>
+                                                <div class="math-formula">(a×b)×c=a×(b×c)</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">乘法分配律：</div>
+                                                <div class="math-formula">a×(b+c)=a×b+a×c</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                
+                                <div class="card">
+                                    <h2>去括号</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">括号前是"+"：</div>
+                                                <div class="math-formula">a+(b+c)=a+b+c</div>
+                                                <div class="math-formula">a+(b-c)=a+b-c</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">括号前是"-"：</div>
+                                                <div class="math-formula">a-(b+c)=a-b-c</div>
+                                                <div class="math-formula">a-(b-c)=a-b+c</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">括号前是"×"：</div>
+                                                <div class="math-formula">a×(b×c)=a×b×c</div>
+                                                <div class="math-formula">a×(b÷c)=a×b÷c</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">括号前是"÷"：</div>
+                                                <div class="math-formula">a÷(b×c)=a÷b÷c</div>
+                                                <div class="math-formula">a÷(b÷c)=a÷b×c</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                
+                                <div class="card">
+                                    <h2>分数</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">分数加法：</div>
+                                                <div class="sub-text">分母相同：</div>
+                                                <div class="math-formula">\dfrac{\small b}{\small a}+\dfrac{\small c}{\small a}=\dfrac{\small b+c}{\small a}</div>
+                                                <div class="sub-text">分母不同：</div>
+                                                <div class="sub-text">先通分，再加减</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">分数减法：</div>
+                                                <div class="sub-text">分母相同：</div>
+                                                <div class="math-formula">\dfrac{\small b}{\small a}-\dfrac{\small c}{\small a}=\dfrac{\small b-c}{\small a}</div>
+                                                <div class="sub-text">分母不同：</div>
+                                                <div class="sub-text">先通分，再加减</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">分数乘法：</div>
+                                                <div class="math-formula">\dfrac{\small b}{\small a}×\dfrac{\small d}{\small c}=\dfrac{\small b×d}{\small a×c}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">分数除法：</div>
+                                                <div class="math-formula">\dfrac{\small b}{\small a}÷\dfrac{\small d}{\small c}=\dfrac{\small b}{\small a}×\dfrac{\small c}{\small d}=\dfrac{\small b×c}{\small a×d}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 单位换算 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">单位换算 <span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="card">
+                                    <h2>长度</h2>
+                                    <div class="image-container">
+                                        <img src="images/Unit4Length.png" alt="长度单位" class="responsive-image">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h2>面积</h2>
+                                    <div class="image-container">
+                                        <img src="images/Unit4Area.png" alt="面积单位" class="responsive-image">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h2>体积</h2>
+                                    <div class="image-container">
+                                        <img src="images/Unit4Volume.png" alt="体积单位" class="responsive-image">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h2>重量</h2>
+                                    <div class="image-container">
+                                        <img src="images/Unit4Weight.png" alt="重量单位" class="responsive-image">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h2>时间</h2>
+                                    <div class="image-container">
+                                        <img src="images/Unit4Time.png" alt="时间单位" class="responsive-image">
+                                    </div>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">月份：</div>
+                                                <div class="sub-text">31天：1月、3月、5月、7月、8月、10月、12月</div>
+                                                <div class="sub-text">30天：4月、6月、9月、11月</div>
+                                                <div class="sub-text">29天：平年2月</div>
+                                                <div class="sub-text">28天：闰年2月</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">年份：</div>
+                                                <div class="sub-text">平年：365天</div>
+                                                <div class="sub-text">闰年：366天</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">什么是闰年：</div>
+                                                <div class="sub-text">整百年份(后两位是00)：被400整除的是闰年</div>
+                                                <div class="sub-text">非整百年份(后两位不是00)：被4整除的是闰年</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- 几何图形 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">几何图形 <span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="card">
+                                    <h2>周长</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">长方形：</div>
+                                                <div class="math-formula">C=2×(长+宽)</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">正方形：</div>
+                                                <div class="math-formula">C=4×边长</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">圆：</div>
+                                                <div class="math-formula">C=2πr=πd</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">π的定义：</div>
+                                                <div class="sub-text">圆的<span style="color:red;">周长(C)</span>与其<span style="color:red;">直径(d)</span>的比值</div>
+                                                <div class="math-formula">π=\dfrac{\small C}{\small d}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <h2>面积</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">长方形：</div>
+                                                <div class="math-formula">S=长×宽</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">正方形：</div>
+                                                <div class="math-formula">S=边长²</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">平行四边形：</div>
+                                                <div class="math-formula">S=底×高</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">三角形：</div>
+                                                <div class="math-formula">S=\dfrac{\small 底×高}{\small 2}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">梯形：</div>
+                                                <div class="math-formula">S=\dfrac{\small (上底+下底)×高}{\small 2}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">圆：</div>
+                                                <div class="math-formula">S=πr²</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <h2>体积</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">长方体：</div>
+                                                <div class="math-formula">V=长×宽×高</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">正方体：</div>
+                                                <div class="math-formula">V=边长³</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">圆柱体：</div>
+                                                <div class="math-formula">V=底面积×高</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <a href="https://v.douyin.com/6UnyHTQkHEg" target="_blank">
+                                        <button class="btn vertical-layout">
+                                            <div class="btn-content">
+                                                <div class="text-group">
+                                                    <div class="main-text">🎦圆锥体：</div>
+                                                    <div class="math-formula">V=\dfrac{\small 1}{\small 3}×底面积×高</div>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- 数学与生活 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">数学与生活 <span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="card">
+                                    <h2>行程</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">路程：</div>
+                                                <div class="sub-text">路程=速度×时间</div>
+                                                <div class="math-formula">s=v×t</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">速度：</div>
+                                                <div class="sub-text">速度=路程÷时间</div>
+                                                <div class="math-formula">v=\dfrac{\small s}{\small t}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">时间：</div>
+                                                <div class="sub-text">时间=路程÷速度</div>
+                                                <div class="math-formula">t=\dfrac{\small s}{\small v}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <h2>统计</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">平均数：</div>
+                                                <div class="math-formula">平均数=\dfrac{\small 数据总和}{\small 数据个数}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">中位数：</div>
+                                                <div class="sub-text">一组数据，按大小顺序排列后，处于中间位置的数值</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">众数：</div>
+                                                <div class="sub-text">一组数据中，出现次数最多的数值</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">极差：</div>
+                                                <div class="sub-text">一组数据中，最大值减最小值的差</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <h2>概率</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">概率：</div>
+                                                <div class="math-formula">概率=\dfrac{\small 目标的结果数量}{\small 所有可能的结果数量}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <h2>比例</h2>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">基本性质：</div>
+                                                <div class="sub-text">如果 a:b=c:d（b≠0,d≠0）,那么ad=bc</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">比值：</div>
+                                                <div class="math-formula">a:b=\dfrac{\small a}{\small b}=a÷b</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">正比例：</div>
+                                                <div class="sub-text">两种相关联的量一起变化，如果它们的比值一定，这两种量成正比例</div>
+                                                <div class="math-formula">例如：速度一定时，路程和时间成正比例（v=\dfrac{\small s}{\small t}）</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">反比例：</div>
+                                                <div class="sub-text">两种相关联的量一起变化，如果它们的乘积一定，这两种量成反比例</div>
+                                                <div class="math-formula">例如：路程一定时，速度和时间成反比例（s=v×t）</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button class="btn vertical-layout">
+                                        <div class="btn-content">
+                                            <div class="text-group">
+                                                <div class="main-text">百分比：</div>
+                                                <div class="math-formula">百分比=\dfrac{\small 部分数量}{\small 总体数量}×100\%</div>
+                                                <div class="math-formula">部分数量=总体数量×百分比</div>
+                                                <div class="math-formula">总体数量=部分数量÷百分比</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="junior-math" class="sub-content">
-                    <div class="card">
-                        <h2>📚 初中数学</h2>
-                        <p>
-                            建设中
-                        </p>
+                    <div class="accordion">
+                        <!-- 几何图形 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">建设中<span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="btn-group">
+                                    <button class="btn">敬请期待</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--
@@ -151,19 +615,33 @@
         <div class="content-pane" id="common">
             <div class="container">
                 <div id="grade1" class="sub-content active">
-                    <!-- 一年级内容 -->
-                    <div class="card">
-                        <h2>📚 一年级数学</h2>
-                        <button class="btn">一年级数学</button>
+                    <div class="accordion">
+                        <!-- 几何图形 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">建设中<span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="btn-group">
+                                    <button class="btn">敬请期待</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <div id="grade2" class="sub-content">
-                    <div class="card">
-                        <h2>📚 二年级数学</h2>
-                        <button class="btn">二年级数学</button>
+                    <div class="accordion">
+                        <!-- 几何图形 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">建设中<span class="arrow">▶</span></h3>
+                            <div class="accordion-content">
+                                <div class="btn-group">
+                                    <button class="btn">敬请期待</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>                
+                </div>     
+                <!--           
                 <div id="grade3" class="sub-content">
                     <div class="card">
                         <h2>📚 三年级数学</h2>
@@ -206,6 +684,7 @@
                         <button class="btn">初三数学</button>
                     </div>
                 </div>
+                -->
             </div>
         </div>
 
@@ -235,8 +714,14 @@
                 </div>   
             </div>
         </div>
-
     </div>
+    
+    <!--
+    <div class="beian-info">
+        <a href="https://beian.miit.gov.cn" target="_blank">京ICP备2025114211号-1</a>
+        <a href="http://www.beian.gov.cn" target="_blank">京公网安备11011302007471号</a>
+    </div>
+    -->
 
     <script>
         // 一级导航切换
@@ -367,6 +852,65 @@
         // 初始化
         updateScrollArrows();
         window.addEventListener('resize', updateScrollArrows);
+
+        // 手风琴功能
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                // 关闭所有其他项
+                this.closest('.accordion').querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.style.maxHeight = null;
+                });
+                
+                // 切换当前项
+                if (!isActive) {
+                this.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // 在页面底部添加数学公式支持
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载KaTeX库
+            const katexScript = document.createElement('script');
+            katexScript.src = 'katex/katex.min.js';
+            document.head.appendChild(katexScript);
+
+            // 自动渲染公式
+            katexScript.onload = function() {
+                document.querySelectorAll('.math-formula').forEach(el => {
+                    // 去除元素前后的空白字符
+                    const formulaText = el.textContent.trim(); 
+                    try {
+                        // 清空元素内容，避免多余文本
+                        el.innerHTML = ''; 
+                        katex.render(formulaText, el, {
+                            throwOnError: true, // 开启错误抛出，便于调试
+                            displayMode: false
+                        });
+                    } catch (error) {
+                        console.error('KaTeX 渲染错误:', error);
+                        // 渲染失败时，显示原始文本
+                        el.textContent = formulaText; 
+                    }
+                });
+            };
+
+            // 动态内容处理
+            document.querySelectorAll('.btn .btn-content').forEach(btn => {
+                // 自动换行保护
+                const content = btn.querySelector('.btn-content');
+                if (content.scrollHeight > btn.offsetHeight) {
+                    btn.style.alignItems = 'flex-start';
+                    btn.style.paddingTop = '12px';
+                    btn.style.paddingBottom = '12px';
+                }
+            });
+        });
     </script>
 </body>
 </html>
