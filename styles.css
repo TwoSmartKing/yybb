@@ -151,7 +151,7 @@
 }
 
 .scroll-container {
-    height: 100%;
+    height: auto;
     width: 100%;
     overflow-y: auto;
     display: flex;          /* 新增 */
@@ -475,6 +475,7 @@
     overflow: hidden;
     border: 2px solid #ffdada; /* 统一边框颜色 */
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 5px; /* 增加底部外边距 */
 }
 
 .accordion-header {
@@ -492,13 +493,17 @@
 }
 
 .accordion-content {
-    padding-top: 12px;  /* 增加顶部内边距 */
-    padding-bottom: 8px;
-    padding: 0 0px; /* 调整左右内边距 */;
+    /* padding-top: 12px;  /* 增加顶部内边距 */
+    /* padding-bottom: 8px;
+    padding: 0 0px; 调整左右内边距 */
+    padding-top: 0;  /* 顶部内边距设为 0 */
+    padding-bottom: 0; /* 底部内边距设为 0 */
+    padding-left: 0; /* 左边内边距设为 0 */
+    padding-right: 0; /* 右边内边距设为 0 */
     max-height: 0;
-    overflow: hidden;
     transition: max-height 0.3s ease-out;
     background: #ffffff; /* 移除背景色 */
+    overflow: hidden;
 }
 
 /* 内容卡片间距调整 */
@@ -520,6 +525,10 @@
 
 .accordion-header.active .arrow {
     transform: rotate(90deg) scale(1.1);
+}
+
+.accordion-header.active + .accordion-content {
+    max-height: 100%; /* 根据最大内容高度调整 */
 }
 
 .btn-group {

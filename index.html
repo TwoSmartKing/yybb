@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杨杨爸爸理科学习训练</title>
+    <title>杨杨自习室</title>
     <link rel="stylesheet" href="styles.css"> 
     <link rel="stylesheet" href="katex/katex.min.css">
 </head>
@@ -885,14 +885,14 @@
                 
                 // 关闭所有其他项
                 this.closest('.accordion').querySelectorAll('.accordion-header').forEach(h => {
-                h.classList.remove('active');
-                h.nextElementSibling.style.maxHeight = null;
+                    h.classList.remove('active');
+                    h.nextElementSibling.style.maxHeight = null;
                 });
                 
                 // 切换当前项
                 if (!isActive) {
-                this.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + 'px';
+                    this.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
                 }
             });
         });
