@@ -943,7 +943,15 @@
                 }
             });
         });
-
+        
+        // 为所有的 toggle-icon 类元素添加点击事件监听器
+        document.querySelectorAll('.toggle-icon').forEach(icon => {
+            icon.addEventListener('click', function(event) {
+                // 阻止事件冒泡
+                event.stopPropagation();
+            });
+        });
+        
         // 在页面底部添加数学公式支持
         document.addEventListener('DOMContentLoaded', function() {
             // 触发默认导航项的点击
