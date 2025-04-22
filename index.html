@@ -253,7 +253,10 @@
                             
                             <!-- 单位换算 -->
                             <div class="accordion-item">
-                                <h3 class="accordion-header">单位换算 <span class="arrow">▶</span></h3>
+                                <h3 class="accordion-header">单位换算 <span class="arrow">▶</span>
+                                    <!-- 新增可点击的emoji图标 -->
+                                    <a href="https://v.douyin.com/SOQnJHx2ZP4/ a@a.NJ 10/10 mQ:/" target="_blank" style="margin-left: 10px;display: none;text-decoration: none;"class="toggle-icon">🎦</a>
+                                </h3>
                                 <div class="accordion-content">
                                     <div class="card">
                                         <h2>长度</h2>
@@ -881,18 +884,62 @@
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', function() {
                 const content = this.nextElementSibling;
-                const isActive = this.classList.contains('active');
-                
-                // 关闭所有其他项
-                this.closest('.accordion').querySelectorAll('.accordion-header').forEach(h => {
-                    h.classList.remove('active');
-                    h.nextElementSibling.style.maxHeight = null;
-                });
-                
+                const parentAccordion = this.closest('.accordion');
+                const scrollContainer = this.closest('.scroll-container');
+                const toggleIcon = this.querySelector('.toggle-icon');
+
+                // 获取当前激活的项
+                const currentActive = parentAccordion.querySelector('.accordion-header.active');
+
+                // 强制滚动到顶部函数
+                const forceScrollTop = () => {
+                    if (scrollContainer) {
+                        scrollContainer.scrollTop = 0;
+                        requestAnimationFrame(() => {
+                            scrollContainer.scrollTop = 0;
+                        });
+                    }
+                };
+
+                // 关闭其他项时处理图标
+                if (currentActive && currentActive !== this) {
+                    const currentContent = currentActive.nextElementSibling;
+                    const currentToggleIcon = currentActive.querySelector('.toggle-icon');
+                    
+                    currentActive.classList.remove('active');
+                    currentContent.style.maxHeight = null;
+                    currentActive.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                    
+                    if (currentToggleIcon) {
+                        currentToggleIcon.style.display = 'none';
+                    }
+                    
+                    forceScrollTop();
+                }
+
                 // 切换当前项
-                if (!isActive) {
+                if (!this.classList.contains('active')) {
+                    // 展开状态
                     this.classList.add('active');
                     content.style.maxHeight = content.scrollHeight + 'px';
+                    this.querySelector('.arrow').style.transform = 'rotate(90deg)';
+                    
+                    // 显示toggle图标
+                    if (toggleIcon) {
+                        toggleIcon.style.display = 'inline-block';
+                    }
+                    
+                    setTimeout(forceScrollTop, 300);
+                } else {
+                    // 收起状态
+                    this.classList.remove('active');
+                    content.style.maxHeight = null;
+                    this.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                    
+                    // 隐藏toggle图标
+                    if (toggleIcon) {
+                        toggleIcon.style.display = 'none';
+                    }
                 }
             });
         });

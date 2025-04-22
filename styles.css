@@ -479,6 +479,7 @@
 }
 
 .accordion-header {
+    position: relative;
     background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
     padding: 16px 20px;
     font-size: 18px;
@@ -490,6 +491,7 @@
 .accordion-header.active {
     background: linear-gradient(135deg, #ffe8e8 0%, #ffdfdf 100%);
     border-bottom-color: transparent; /* 展开时隐藏分割线 */
+    transition: background 0.3s;
 }
 
 .accordion-content {
@@ -504,6 +506,7 @@
     transition: max-height 0.3s ease-out;
     background: #ffffff; /* 移除背景色 */
     overflow: hidden;
+    display: none; /* 改为默认显示 */
 }
 
 /* 内容卡片间距调整 */
@@ -523,12 +526,20 @@
     text-align: center;
 }
 
+.accordion-header .arrow {
+    margin-left: 10px;
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+
 .accordion-header.active .arrow {
     transform: rotate(90deg) scale(1.1);
 }
 
 .accordion-header.active + .accordion-content {
-    max-height: 100%; /* 根据最大内容高度调整 */
+    display: block; /* 激活时显示 */
+    max-height: 2000px; /* 设置一个足够大的值 */
+    transition: max-height 0.3s ease-in;
 }
 
 .btn-group {
